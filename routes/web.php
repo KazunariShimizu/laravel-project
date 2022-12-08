@@ -32,6 +32,9 @@ Route::fallback(function(){
 Route::get('/ctrl','CtrlController@upload');
 Route::post('/ctrl/result','CtrlController@result');
 Route::post('/ctrl/uploadfile','CtrlController@uploadfile');
+
+Route::get('save/create', 'SaveController@create');
+Route::post('save','SaveController@store');
 Route::get('/save/{id}/edit','SaveController@edit');
 Route::patch('/save/{id}','SaveController@update');
 Route::get('/save/{id}','SaveController@show');

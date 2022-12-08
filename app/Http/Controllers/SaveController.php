@@ -34,9 +34,10 @@ class SaveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
         //
+        $this->validate($req,Book::$rules);
         $b = new Book();
         $b->fill($req->except('_token'))->save();
         return redirect('save/create');
@@ -80,6 +81,7 @@ class SaveController extends Controller
     public function update(Request $req, $id)
     {
         //
+        $this->validate($req,Book::$rules);
         $b = Book::findOrFail($id);
         $b->fill($req->except('_token','_method'))->save();
         return redirect('hello/list');

@@ -1,16 +1,32 @@
-@extends('layout.base')
+@extends('layouts.base')
 @section('title','書籍情報ホーム')
 @section('main')
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $err)
+        <li class="text-danger">{{ $err }}</li>
+        @endforeach
+    </u>
+@endif
+
 <form method="POST" action="/save">
     @csrf
     <div clss="pl-2">
         <label id="isbn">ISBNコード：</label><br/>
-        <input id="isbn" name="isbn" type="text" size="15" value="{{ old('isbn') }}" />
+        <input id="isbn" name="isbn" type="text" size="15" value="{{ old('isbn') }}"
+        class="@error('isbn') bg-danger @enderror" />
     </div>
+    @error('isbn')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <div clss="pl-2">
         <label id="title">書名：</label><br/>
-        <input id="title" name="title" type="text" size="30" value="{{ old('title') }}" />
+        <input id="title" name="title" type="text" size="30" value="{{ old('title') }}"
+        class="@error('title') bg-danger @enderror" />
     </div>
+    @error('title')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <div clss="pl-2">
         <label id="price">価格：</label><br/>
         <input id="peice" name="price" type="text" size="5" value="{{ old('price') }}" />

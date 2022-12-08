@@ -1,6 +1,13 @@
 @extends('layouts.base')
 @section('title','書籍情報フォーム（編集）')
 @section('main')
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $err)
+        <li class="text-danger">{{ $err }}</li>
+        @endforeach
+    </u>
+@endif
 <form method="POST" action="/save/{{ $b->id }}">
     @csrf
     @method('PATCH')
